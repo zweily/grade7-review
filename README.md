@@ -15,18 +15,30 @@
     *   扩展知识点支持弹窗交互学习。
 *   **📱 响应式设计**：完美支持手机、平板和电脑访问。
 
-## 🚀 快速部署 (Deploy)
+## 🚀 部署到 Cloudflare Pages (Deployment)
 
-你可以通过点击下面的按钮，将本项目一键部署到 Cloudflare Pages。
+由于这是一个静态网站项目，推荐使用 **Cloudflare Pages** 进行免费、快速的全球部署。之前提到的“一键部署按钮”主要用于 Workers 项目，不适用于本项目，因此请按照以下标准步骤操作：
 
-[![Deploy to Cloudflare Pages](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/YOUR_USERNAME/YOUR_REPO_NAME)
+### 步骤 1: 上传代码到 GitHub
+1.  下载本项目的 ZIP 包并解压。
+2.  在你自己的 GitHub 账号下创建一个新的空仓库（例如 `grade7-review`）。
+3.  将解压后的所有文件上传到该仓库。
 
-**注意：**
-1.  你需要先将本项目代码上传到你自己的 GitHub 仓库。
-2.  替换上面链接中的 `YOUR_USERNAME` 和 `YOUR_REPO_NAME` 为你的 GitHub 用户名和仓库名。
-3.  Cloudflare Pages 会自动识别 `Vite` 框架。
-    *   **Build command:** `npm run build`
-    *   **Build output directory:** `dist`
+### 步骤 2: 在 Cloudflare 中创建项目
+1.  登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)。
+2.  进入 **Workers & Pages** -> **Overview**。
+3.  点击 **Create application** -> 选择 **Pages** 标签 -> 点击 **Connect to Git**。
+4.  授权并选择你刚才创建的 GitHub 仓库。
+
+### 步骤 3: 配置构建设置 (Build Settings)
+Cloudflare 通常会自动检测，但请确认以下设置以确保成功：
+
+*   **Framework preset**: 选择 `Vite`
+*   **Build command**: `npm run build`
+*   **Build output directory**: `dist`
+
+### 步骤 4: 完成
+点击 **Save and Deploy**。等待约 1-2 分钟，构建完成后，你将获得一个 `https://your-project.pages.dev` 的永久访问链接！
 
 ## 🛠️ 本地运行 (Run Locally)
 
