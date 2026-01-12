@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Volume2, Eye, BookOpen, ChevronUp, MoreHorizontal, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { CardContent, CardFooter, CardHeader } from '@/components/ui/card'; // Card is not used directly as root div style
+import { CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
@@ -14,8 +14,7 @@ interface SlideCardProps {
   isActive: boolean;
 }
 
-// Reusable Audio Button Component
-function PlayAudioButton({ id, text, variant = "ghost", size = "icon", label }: { id: string, text: string, variant?: "ghost" | "default" | "outline" | "secondary", size?: "icon" | "sm" | "lg", label?: string }) {
+function PlayAudioButton({ id, text, variant = "ghost", size = "icon", label, className }: { id: string, text: string, variant?: "ghost" | "default" | "outline" | "secondary", size?: "icon" | "sm" | "lg", label?: string, className?: string }) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -44,7 +43,6 @@ function PlayAudioButton({ id, text, variant = "ghost", size = "icon", label }: 
     audio.onerror = () => {
       console.error("Audio missing or error:", audioPath);
       setPlaying(false);
-      // Fallback
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
       utterance.rate = 0.8;
@@ -62,46 +60,48 @@ function PlayAudioButton({ id, text, variant = "ghost", size = "icon", label }: 
   };
 
   return (
-    <Button variant={variant} size={size} onClick={handlePlay} className={cn("transition-all", playing && "text-primary animate-pulse")}>
+    <Button variant={variant} size={size} onClick={handlePlay} className={cn("transition-all flex-shrink-0", playing && "text-primary animate-pulse", className)}>
       <Volume2 className={cn("w-4 h-4", label && "mr-2")} />
       {label && (playing ? "Playing" : label)}
     </Button>
   );
 }
 
-// Extension Detail Card Component
 function ExtensionDetail({ ext }: { ext: Extension }) {
   const { data } = ext;
   return (
-    <div className="space-y-4">
-      <div className="flex items-start justify-between">
+    <div className="space-y-6 py-2">
+      <div className="flex items-start justify-between bg-muted/30 p-4 rounded-lg">
         <div>
-           <div className="flex items-center gap-2 mb-1">
-             <Badge>{ext.label}</Badge>
+           <div className="flex items-center gap-2 mb-2">
+             <Badge variant="outline" className="bg-background">{ext.label}</Badge>
            </div>
-           <h3 className="text-2xl font-bold text-primary">{data.english}</h3>
-           <p className="text-lg text-muted-foreground">{data.translation}</p>
+           <h3 className="text-3xl font-bold text-primary tracking-tight">{data.english}</h3>
+           <p className="text-xl text-muted-foreground mt-1">{data.translation}</p>
         </div>
-        <PlayAudioButton id={data.id} text={data.english} variant="secondary" size="sm" label="Read" />
+        <PlayAudioButton id={data.id} text={data.english} variant="default" size="sm" label="Read" />
       </div>
 
       {data.explanation && (
-        <div className="bg-muted/30 p-3 rounded-md">
-           <p className="text-sm text-foreground/80">{data.explanation}</p>
+        <div className="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+           <h4 className="text-xs font-bold text-blue-600 uppercase mb-2">Explanation</h4>
+           <p className="text-sm text-foreground/80 leading-relaxed">{data.explanation}</p>
         </div>
       )}
 
       {data.examples && data.examples.length > 0 && (
-        <div className="space-y-2">
-           <h4 className="text-xs font-bold text-muted-foreground uppercase">Examples</h4>
-           <div className="space-y-2">
+        <div className="space-y-3">
+           <h4 className="text-xs font-bold text-muted-foreground uppercase flex items-center gap-2">
+             <span className="w-8 h-[1px] bg-border"></span> Examples <span className="w-8 h-[1px] bg-border"></span>
+           </h4>
+           <div className="space-y-3">
              {data.examples.map((ex) => (
-               <div key={ex.id} className="bg-secondary/20 p-2 rounded border flex items-start justify-between gap-2">
-                  <div className="text-sm">
-                    <p className="italic text-foreground/90">"{ex.en}"</p>
-                    <p className="text-muted-foreground text-xs mt-0.5">{ex.zh}</p>
+               <div key={ex.id} className="bg-card p-3 rounded-lg border shadow-sm flex items-start gap-3 hover:border-primary/20 transition-colors">
+                  <PlayAudioButton id={ex.id} text={ex.en} variant="ghost" size="icon" className="mt-0.5" />
+                  <div className="text-sm flex-1">
+                    <p className="text-foreground/90 font-medium leading-relaxed">"{ex.en}"</p>
+                    <p className="text-muted-foreground text-xs mt-1">{ex.zh}</p>
                   </div>
-                  <PlayAudioButton id={ex.id} text={ex.en} variant="ghost" size="icon" />
                </div>
              ))}
            </div>
@@ -115,7 +115,6 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
   const [showTranslation, setShowTranslation] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
 
-  // Reset state when slide changes
   useEffect(() => {
     setShowTranslation(false);
     setShowExplanation(false);
@@ -124,19 +123,19 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
 
   return (
     <Card className={cn(
-      "w-full max-w-5xl mx-auto h-[650px] flex flex-col md:flex-row overflow-hidden transition-all duration-300 shadow-2xl border-0 bg-white/95 backdrop-blur-sm",
+      "w-full max-w-5xl mx-auto h-[680px] flex flex-col md:flex-row overflow-hidden transition-all duration-300 shadow-2xl border-0 bg-white/95 backdrop-blur-sm",
       isActive ? "opacity-100 scale-100" : "opacity-0 scale-95 absolute top-0"
     )}>
       {/* Left side: Image */}
       <div className={cn(
-        "w-full md:w-5/12 bg-muted relative overflow-hidden transition-all duration-500",
+        "w-full md:w-5/12 bg-muted relative overflow-hidden transition-all duration-500 group",
         showExplanation ? "h-32 md:h-full md:w-1/3" : "h-48 md:h-full"
       )}>
         {item.imageUrl ? (
             <img 
               src={item.imageUrl} 
               alt={item.english} 
-              className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/20">
@@ -145,7 +144,7 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
         )}
         
         <div className="absolute top-4 left-4">
-           <Badge variant="secondary" className="backdrop-blur-md bg-white/80 shadow-sm border-0 text-xs px-2 py-1 uppercase tracking-wider text-primary">
+           <Badge variant="secondary" className="backdrop-blur-md bg-white/90 shadow-sm border-0 text-xs px-2 py-1 uppercase tracking-wider text-primary font-bold">
             {item.category.replace('-', ' ')}
           </Badge>
         </div>
@@ -153,7 +152,7 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
 
       {/* Right side: Content */}
       <div className="flex-1 flex flex-col h-full relative">
-        <CardHeader className="text-center pt-8 pb-2 space-y-4">
+        <CardHeader className="text-center pt-8 pb-4 space-y-4 flex-shrink-0">
           <div className="flex justify-center items-center gap-3">
              {item.partOfSpeech && (
               <Badge variant="outline" className="text-sm border-primary/20 text-muted-foreground">
@@ -162,7 +161,7 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
             )}
           </div>
           
-          <div className="space-y-1">
+          <div className="space-y-2">
             <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight">{item.english}</h1>
             {item.phonetic && (
               <p className="text-lg text-muted-foreground font-mono opacity-70">{item.phonetic}</p>
@@ -170,13 +169,13 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
           </div>
         </CardHeader>
 
-        <CardContent className="flex-1 flex flex-col items-center justify-start py-4 gap-6 overflow-y-auto px-6 scrollbar-thin">
+        <CardContent className="flex-1 flex flex-col items-center justify-start py-2 gap-6 overflow-y-auto px-6 scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20">
           {/* Action Buttons */}
-          <div className="flex flex-wrap justify-center gap-3">
-            <PlayAudioButton id={item.id} text={item.english} variant="default" size="sm" label="Read" />
+          <div className="flex flex-wrap justify-center gap-3 sticky top-0 bg-white/95 py-2 z-10 w-full backdrop-blur-sm">
+            <PlayAudioButton id={item.id} text={item.english} variant="default" size="sm" label="Read" className="shadow-sm" />
             
             <Button 
-              variant={showTranslation ? "default" : "outline"} 
+              variant={showTranslation ? "secondary" : "outline"} 
               size="sm"
               onClick={() => setShowTranslation(!showTranslation)}
               className="rounded-full px-5 shadow-sm transition-all"
@@ -186,7 +185,7 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
             </Button>
 
             <Button 
-              variant={showExplanation ? "default" : "outline"} 
+              variant={showExplanation ? "secondary" : "outline"} 
               size="sm"
               onClick={() => setShowExplanation(!showExplanation)}
               className="rounded-full px-5 shadow-sm transition-all"
@@ -198,39 +197,40 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
 
           {/* Translation Area */}
           <div className={cn(
-            "transition-all duration-300 overflow-hidden text-center w-full",
+            "transition-all duration-300 overflow-hidden text-center w-full flex-shrink-0",
             showTranslation ? "max-h-24 opacity-100 scale-100" : "max-h-0 opacity-0 scale-95"
           )}>
-            <p className="text-2xl font-medium text-foreground/80 py-2">
+            <p className="text-2xl font-medium text-foreground/80 py-2 border-b border-border/50 mx-10">
               {item.translation}
             </p>
           </div>
 
           {/* Extended Content Area */}
           <div className={cn(
-            "w-full transition-all duration-500 ease-in-out space-y-5 text-left pb-4",
+            "w-full transition-all duration-500 ease-in-out space-y-6 text-left pb-6",
             showExplanation ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 hidden"
           )}>
-             <Separator className="bg-border/50" />
              
             {/* Explanation */}
-            <div className="space-y-1">
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Definition</h3>
+            <div className="bg-muted/30 p-4 rounded-lg">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">Definition</h3>
               <p className="text-base leading-relaxed text-foreground/90">{item.explanation}</p>
             </div>
 
             {/* Examples */}
             {item.examples && item.examples.length > 0 && (
-              <div className="space-y-2">
-                <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Examples</h3>
-                <div className="space-y-3">
+              <div className="space-y-3">
+                <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+                   Examples
+                </h3>
+                <div className="grid gap-3">
                   {item.examples.map((ex) => (
-                    <div key={ex.id} className="bg-secondary/30 p-3 rounded-lg border border-transparent hover:border-primary/10 transition-colors flex justify-between items-start gap-3 group">
+                    <div key={ex.id} className="bg-background p-3 rounded-lg border shadow-sm hover:border-primary/20 transition-all flex gap-3 group">
+                      <PlayAudioButton id={ex.id} text={ex.en} variant="ghost" size="icon" className="mt-0.5 text-muted-foreground group-hover:text-primary" />
                       <div>
-                        <p className="text-base italic text-foreground/90 font-medium">"{ex.en}"</p>
+                        <p className="text-base text-foreground/90 font-medium leading-snug">"{ex.en}"</p>
                         <p className="text-sm text-muted-foreground mt-1">{ex.zh}</p>
                       </div>
-                      <PlayAudioButton id={ex.id} text={ex.en} variant="ghost" size="icon" />
                     </div>
                   ))}
                 </div>
@@ -239,34 +239,37 @@ export function SlideCard({ item, isActive }: SlideCardProps) {
 
             {/* Extensions */}
             {item.extensions && item.extensions.length > 0 && (
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                {item.extensions.map((ext, idx) => (
-                  <Dialog key={idx}>
-                    <DialogTrigger asChild>
-                      <button className="bg-background border p-3 rounded text-center shadow-sm hover:shadow-md hover:border-primary/30 transition-all group flex flex-col items-center justify-center">
-                        <span className="text-[10px] font-bold text-primary uppercase block mb-1">{ext.label}</span>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-medium">{ext.data.english}</span>
-                          <MoreHorizontal className="w-3 h-3 text-muted-foreground group-hover:text-primary" />
-                        </div>
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle>{ext.label}</DialogTitle>
-                        <DialogDescription>Detailed information</DialogDescription>
-                      </DialogHeader>
-                      <ExtensionDetail ext={ext} />
-                    </DialogContent>
-                  </Dialog>
-                ))}
+              <div className="space-y-3">
+                <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Related</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {item.extensions.map((ext, idx) => (
+                    <Dialog key={idx}>
+                      <DialogTrigger asChild>
+                        <button className="bg-background border p-3 rounded-lg text-left shadow-sm hover:shadow-md hover:border-primary/30 transition-all group flex items-center justify-between">
+                          <div className="min-w-0">
+                            <span className="text-[10px] font-bold text-primary uppercase block mb-0.5">{ext.label}</span>
+                            <span className="text-sm font-medium truncate block">{ext.data.english}</span>
+                          </div>
+                          <MoreHorizontal className="w-4 h-4 text-muted-foreground group-hover:text-primary flex-shrink-0 ml-2" />
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-lg max-h-[80vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle>Knowledge Extension</DialogTitle>
+                          <DialogDescription>Expand your vocabulary</DialogDescription>
+                        </DialogHeader>
+                        <ExtensionDetail ext={ext} />
+                      </DialogContent>
+                    </Dialog>
+                  ))}
+                </div>
               </div>
             )}
           </div>
         </CardContent>
 
-        <CardFooter className="justify-center py-3 text-[10px] text-muted-foreground/60 uppercase tracking-widest">
-           Interactive Learning Card
+        <CardFooter className="justify-center py-3 text-[10px] text-muted-foreground/40 uppercase tracking-widest border-t border-border/30 bg-muted/5">
+           Unit Review • Grade 7
         </CardFooter>
       </div>
     </Card>
