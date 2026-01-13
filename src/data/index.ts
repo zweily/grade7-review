@@ -3,6 +3,7 @@ import { unit2Data } from './unit2';
 import { unit3Data } from './unit3';
 import { unit4Data } from './unit4';
 import { unit5Data } from './unit5';
+import { unit6Data } from './unit6';
 import type { Section } from '../types';
 
 export interface Unit {
@@ -42,5 +43,11 @@ export const units: Unit[] = [
     title: 'Unit 5: Films',
     description: 'Movie genres, cinemas, and entertainment.',
     data: unit5Data
+  },
+  {
+    id: 'u6',
+    title: 'Unit 6: Mountains and rivers',
+    description: 'Geography, natural scenery, and travel experiences.',
+    data: unit6Data
   }
 ];

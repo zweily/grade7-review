@@ -1,0 +1,6 @@
+{
+	"appId": "com.yourcompany.revise7",
+	"appName": "revise-7au1-slides",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

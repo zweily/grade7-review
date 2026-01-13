@@ -19,7 +19,7 @@ export interface Extension {
 export interface KnowledgePoint {
   id: string;
   type: 'word' | 'phrase' | 'sentence';
-  category: 'core-word' | 'extended-word' | 'core-phrase' | 'key-sentence';
+  category: 'core-word' | 'extended-word' | 'core-phrase' | 'key-sentence' | 'supplementary';
   english: string;
   phonetic?: string;
   translation: string;
