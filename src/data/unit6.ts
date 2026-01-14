@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import unit6_supp_a_unit_img from '@/assets/images/background.jpg';
 import unit6_supp_ca_a_img from '@/assets/images/u4-textbook.jpg';
 import unit6_supp_do_remember_to_wear__img from '@/assets/images/u2-used-to-do.jpeg';
@@ -1788,6 +1788,312 @@ export const unit6Data: Section[] = [
             } 
           }
 ]
+      }
+    ]
+  }
+
+  ,{
+    id: 'u6-supplementary',
+    title: '5. 补充内容 (Supplementary)',
+    items: [
+      {
+        id: 'u6-supp-1',
+        type: 'word',
+        category: 'supplementary',
+        english: "A Unit",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of A Unit",
+        imageUrl: unit6_supp_a_unit_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-1-ex1', en: 'A Unit', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-2',
+        type: 'word',
+        category: 'supplementary',
+        english: "Ca a",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of Ca a",
+        imageUrl: unit6_supp_ca_a_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-2-ex1', en: 'Ca a', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-3',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "Do remember to wear warm clothes",
+        translation: "务必记得穿上暖和的衣服",
+        explanation: "Definition or usage of Do remember to wear warm clothes",
+        imageUrl: unit6_supp_do_remember_to_wear__img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-3-ex1', en: 'Do remember to wear warm clothes', zh: '务必记得穿上暖和的衣服' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-4',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "Hope you will come here one day",
+        translation: "希望有一天你能来这里",
+        explanation: "Definition or usage of Hope you will come here one day",
+        imageUrl: unit6_supp_hope_you_will_come_h_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-4-ex1', en: 'Hope you will come here one day', zh: '希望有一天你能来这里' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-5',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "London and Shanghai aie not alone as riverside cities",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of London and Shanghai aie not alone as riverside cities",
+        imageUrl: unit6_supp_london_and_shanghai__img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-5-ex1', en: 'London and Shanghai aie not alone as riverside cities', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-6',
+        type: 'word',
+        category: 'supplementary',
+        english: "Sat",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of Sat",
+        imageUrl: unit6_supp_sat_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-6-ex1', en: 'Sat', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-7',
+        type: 'word',
+        category: 'supplementary',
+        english: "Tarren a",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of Tarren a",
+        imageUrl: unit6_supp_tarren_a_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-7-ex1', en: 'Tarren a', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-8',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "That sounds like it would be fun",
+        translation: "听起来会很有趣",
+        explanation: "Definition or usage of That sounds like it would be fun",
+        imageUrl: unit6_supp_that_sounds_like_it__img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-8-ex1', en: 'That sounds like it would be fun', zh: '听起来会很有趣' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-9',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "They flow as quietly as they come",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of They flow as quietly as they come",
+        imageUrl: unit6_supp_they_flow_as_quietly_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-9-ex1', en: 'They flow as quietly as they come', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-10',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "What do they have in common",
+        translation: "它们有什么共同之处",
+        explanation: "Definition or usage of What do they have in common",
+        imageUrl: unit6_supp_what_do_they_have_in_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-10-ex1', en: 'What do they have in common', zh: '它们有什么共同之处' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-11',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "What is the height of the Jungfrau",
+        translation: "少女峰的高度是多少",
+        explanation: "Definition or usage of What is the height of the Jungfrau",
+        imageUrl: unit6_supp_what_is_the_height_o_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-11-ex1', en: 'What is the height of the Jungfrau', zh: '少女峰的高度是多少' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-12',
+        type: 'word',
+        category: 'supplementary',
+        english: "You have my word",
+        translation: "向你保证",
+        explanation: "Definition or usage of You have my word",
+        imageUrl: unit6_supp_you_have_my_word_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-12-ex1', en: 'You have my word', zh: '向你保证' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-13',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "a AGRA cover a large area",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of a AGRA cover a large area",
+        imageUrl: unit6_supp_a_agra_cover_a_large_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-13-ex1', en: 'a AGRA cover a large area', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-14',
+        type: 'word',
+        category: 'supplementary',
+        english: "a a a",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of a a a",
+        imageUrl: unit6_supp_a_a_a_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-14-ex1', en: 'a a a', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-15',
+        type: 'word',
+        category: 'supplementary',
+        english: "a geography quiz about",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of a geography quiz about",
+        imageUrl: unit6_supp_a_geography_quiz_abo_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-15-ex1', en: 'a geography quiz about', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-16',
+        type: 'word',
+        category: 'supplementary',
+        english: "cruise TAREE",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of cruise TAREE",
+        imageUrl: unit6_supp_cruise_taree_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-16-ex1', en: 'cruise TAREE', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-17',
+        type: 'word',
+        category: 'supplementary',
+        english: "eatin fa",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of eatin fa",
+        imageUrl: unit6_supp_eatin_fa_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-17-ex1', en: 'eatin fa', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-18',
+        type: 'word',
+        category: 'supplementary',
+        english: "promise",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of promise",
+        imageUrl: unit6_supp_promise_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-18-ex1', en: 'promise', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-19',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "read an article in a magazine",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of read an article in a magazine",
+        imageUrl: unit6_supp_read_an_article_in_a_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-19-ex1', en: 'read an article in a magazine', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-20',
+        type: 'word',
+        category: 'supplementary',
+        english: "sli Anan ae",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of sli Anan ae",
+        imageUrl: unit6_supp_sli_anan_ae_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-20-ex1', en: 'sli Anan ae', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-21',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "the power to shape the life of people",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of the power to shape the life of people",
+        imageUrl: unit6_supp_the_power_to_shape_t_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-21-ex1', en: 'the power to shape the life of people', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-22',
+        type: 'sentence',
+        category: 'supplementary',
+        english: "the rich history of London",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of the rich history of London",
+        imageUrl: unit6_supp_the_rich_history_of__img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-22-ex1', en: 'the rich history of London', zh: '翻译待补充' } 
+        ],
+        extensions: []
+      },
+      {
+        id: 'u6-supp-23',
+        type: 'word',
+        category: 'supplementary',
+        english: "wm SEY",
+        translation: "翻译待补充",
+        explanation: "Definition or usage of wm SEY",
+        imageUrl: unit6_supp_wm_sey_img, // Will be fixed in image task
+        examples: [
+             { id: 'u6-supp-23-ex1', en: 'wm SEY', zh: '翻译待补充' } 
+        ],
+        extensions: []
       }
     ]
   }
