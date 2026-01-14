@@ -21,5 +21,6 @@ export default defineConfig({
     outDir: "dist", 
     emptyOutDir: true,
     assetsInlineLimit: 0,
+    cssCodeSplit: false,
   },
 });
