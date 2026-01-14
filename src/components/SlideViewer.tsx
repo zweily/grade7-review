@@ -24,12 +24,12 @@ export default function SlideViewer({ data, title }: SlideViewerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   
   const currentItem = allItems[currentIndex];
-  const progress = ((currentIndex + 1) / allItems.length) * 100;
+  const progress = allItems.length > 0 ? ((currentIndex + 1) / allItems.length) * 100 : 0;
 
   // Find which section the current item belongs to
-  const currentSection = data.find(section => 
-    section.items.some(item => item.id === currentItem.id)
-  );
+  const currentSection = currentItem 
+    ? data.find(section => section.items.some(item => item.id === currentItem.id))
+    : undefined;
 
   const handleNext = useCallback(() => {
     if (currentIndex < allItems.length - 1) {
@@ -130,7 +130,7 @@ export default function SlideViewer({ data, title }: SlideViewerProps) {
             
             <div className="flex-1 max-w-md hidden md:block">
                 <div className="flex justify-between text-xs font-medium text-foreground/60 mb-2 px-1">
-                    <span>{currentSection?.title}</span>
+                    <span>{currentSection?.title || ''}</span>
                     <span>{currentIndex + 1} / {allItems.length}</span>
                 </div>
                 <Progress value={progress} className="h-2 w-full bg-white/50" />
@@ -153,11 +153,13 @@ export default function SlideViewer({ data, title }: SlideViewerProps) {
 
             {/* Card Container */}
             <div className="w-full h-full flex items-center justify-center relative perspective-1000">
-                <SlideCard 
-                    key={currentItem.id} 
-                    item={currentItem} 
-                    isActive={true} 
-                />
+                {currentItem && (
+                    <SlideCard 
+                        key={currentItem.id} 
+                        item={currentItem} 
+                        isActive={true} 
+                    />
+                )}
             </div>
 
             {/* Next Button */}
