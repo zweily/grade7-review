@@ -8,108 +8,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import type { KnowledgePoint, Extension, Example } from '@/types';
 import { cn } from '@/lib/utils';
 import { Separator } from "@/components/ui/separator";
+import { PlayAudioButton } from "@/components/PlayAudioButton";
+import { ExtensionDetail } from "@/components/ExtensionDetail";
 
 interface SlideCardProps {
   item: KnowledgePoint;
   isActive: boolean;
 }
 
-function PlayAudioButton({ id, text, variant = "ghost", size = "icon", label, className }: { id: string, text: string, variant?: "ghost" | "default" | "outline" | "secondary", size?: "icon" | "sm" | "lg", label?: string, className?: string }) {
-  const [playing, setPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
-  }, []);
 
-  const handlePlay = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    
-    if (playing && audioRef.current) {
-      audioRef.current.pause();
-      setPlaying(false);
-      return;
-    }
 
-    const audioPath = `./audio/${id}.mp3`;
-    const audio = new Audio(audioPath);
-    audioRef.current = audio;
-
-    audio.onended = () => setPlaying(false);
-    audio.onerror = () => {
-      console.error("Audio missing or error:", audioPath);
-      setPlaying(false);
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.8;
-      utterance.onstart = () => setPlaying(true);
-      utterance.onend = () => setPlaying(false);
-      window.speechSynthesis.speak(utterance);
-    };
-
-    audio.play()
-      .then(() => setPlaying(true))
-      .catch(e => {
-        console.error("Playback failed", e);
-        setPlaying(false);
-      });
-  };
-
-  return (
-    <Button variant={variant} size={size} onClick={handlePlay} className={cn("transition-all flex-shrink-0", playing && "text-primary animate-pulse", className)}>
-      <Volume2 className={cn("w-4 h-4", label && "mr-2")} />
-      {label && (playing ? "Playing" : label)}
-    </Button>
-  );
-}
-
-function ExtensionDetail({ ext }: { ext: Extension }) {
-  const { data } = ext;
-  return (
-    <div className="space-y-6 py-2">
-      <div className="flex items-start justify-between bg-muted/30 p-4 rounded-lg">
-        <div>
-           <div className="flex items-center gap-2 mb-2">
-             <Badge variant="outline" className="bg-background">{ext.label}</Badge>
-           </div>
-           <h3 className="text-3xl font-bold text-primary tracking-tight">{data.english}</h3>
-           <p className="text-xl text-muted-foreground mt-1">{data.translation}</p>
-        </div>
-        <PlayAudioButton id={data.id} text={data.english} variant="default" size="sm" label="Read" />
-      </div>
-
-      {data.explanation && (
-        <div className="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
-           <h4 className="text-xs font-bold text-blue-600 uppercase mb-2">Explanation</h4>
-           <p className="text-sm text-foreground/80 leading-relaxed">{data.explanation}</p>
-        </div>
-      )}
-
-      {data.examples && data.examples.length > 0 && (
-        <div className="space-y-3">
-           <h4 className="text-xs font-bold text-muted-foreground uppercase flex items-center gap-2">
-             <span className="w-8 h-[1px] bg-border"></span> Examples <span className="w-8 h-[1px] bg-border"></span>
-           </h4>
-           <div className="space-y-3">
-             {data.examples.map((ex) => (
-               <div key={ex.id} className="bg-card p-3 rounded-lg border shadow-sm flex items-start gap-3 hover:border-primary/20 transition-colors">
-                  <PlayAudioButton id={ex.id} text={ex.en} variant="ghost" size="icon" className="mt-0.5" />
-                  <div className="text-sm flex-1">
-                    <p className="text-foreground/90 font-medium leading-relaxed">"{ex.en}"</p>
-                    <p className="text-muted-foreground text-xs mt-1">{ex.zh}</p>
-                  </div>
-               </div>
-             ))}
-           </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function SlideCard({ item, isActive }: SlideCardProps) {
   const [showTranslation, setShowTranslation] = useState(false);
